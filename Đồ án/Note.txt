@@ -1,0 +1,2 @@
+﻿- Sửa tên "Hóa đơn xuất" thành "Hóa đơn bán hàng"
+- Thêm bước "Lập báo cáo công nợ KH"
