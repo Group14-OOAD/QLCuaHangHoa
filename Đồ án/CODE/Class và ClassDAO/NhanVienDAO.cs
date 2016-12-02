@@ -128,5 +128,27 @@ namespace DAO_Login
                 return null;
             }
         }
+
+        public DataTable getAllNhanVien()
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("NHANVIEN_getAll", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                conn.Close();
+                return dt;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return null;
+            }
+        }
     }
 }

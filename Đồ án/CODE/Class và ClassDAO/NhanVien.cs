@@ -16,9 +16,10 @@ namespace DTO_Login
         public string email { get; set; }
         public string username { get; set; }
         public string password { get; set; }
+        public string maLoaiNV { get; set; }
         public NhanVien() { }
         public NhanVien(string _maNhanVien, string _tenNV, int _ns, string _gt, string _sdt, string _email,
-                        string _username, string _password)
+                        string _username, string _password, string _maLoaiNV)
         {
             maNhanVien = maNhanVien;
             hoTen = _tenNV;
@@ -28,6 +29,7 @@ namespace DTO_Login
             email = _email;
             username = _username;
             password = _password;
+            maLoaiNV = _maLoaiNV;
         }
     }
 }
