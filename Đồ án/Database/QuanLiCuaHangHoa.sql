@@ -2,28 +2,29 @@ Create Database QuanLiCuaHangHoa
 use QuanLiCuaHangHoa
 
 Create Table NhanVien(
-	MaNV char(10) Primary key,
+	MaNV varchar(10) Primary key,
 	HoTen nvarchar(50),
+	NamSinh int,
 	GioiTinh bit,
-	SoDT int,
-	Email char(50),
-	Username char(50),
-	Password char(50),
-	MaLoaiNV char(20)
+	SoDT varchar(15),
+	Email varchar(50),
+	Username varchar(50),
+	Password varchar(50),
+	MaLoaiNV varchar(20)
 )
 
 Create Table SanPham (
-	MaSP char(10) Primary key,
+	MaSP varchar(10) Primary key,
 	TenSP nvarchar(50),
 	DonVi nvarchar(20),
 	DonGia int,
 	GhiChu nvarchar(100),
-	MaLoaiSP char(20),
+	MaLoaiSP varchar(20),
 
 ) 
 
 Create Table KhachHang (
-	MaKH char(10) Primary key,
+	MaKH varchar(10) Primary key,
 	HoTen nvarchar(50),
 	DiaChi nvarchar(50),
 	SoDT int,
@@ -31,7 +32,7 @@ Create Table KhachHang (
 ) 
 
 Create Table NhaCungCap (
-	MaNCC char(10) Primary key,
+	MaNCC varchar(10) Primary key,
 	Ten nvarchar(50),
 	DiaChi nvarchar(50),
 	SoDT int,
@@ -39,10 +40,10 @@ Create Table NhaCungCap (
 )
 
 Create Table DonDatHang (
-	MaDDH char(10) Primary key,
+	MaDDH varchar(10) Primary key,
 	NgayLap date,
-	MaNV char(10),
-	MaKH char(10),
+	MaNV varchar(10),
+	MaKH varchar(10),
 	TongTien int,
 	NgayGiaoDuKien date,
 	GhiChu nvarchar(100)
@@ -50,8 +51,8 @@ Create Table DonDatHang (
 	Foreign key (MaNV) References	NhanVien(MaNV)
 )
 Create Table CT_DonDatHang (
-	MaDDH char(10),
-	MaSP char(10),
+	MaDDH varchar(10),
+	MaSP varchar(10),
 	SoLuong int,
 	ThanhTien int,
 	GhiChu nvarchar(100),
@@ -61,18 +62,18 @@ Create Table CT_DonDatHang (
 )
 
 Create Table PhieuGiaoHang (
-	MaPGH char(10) Primary key,
+	MaPGH varchar(10) Primary key,
 	NgayLap date,
-	MaNV char(10),
-	MaKH char(10),
+	MaNV varchar(10),
+	MaKH varchar(10),
 	TongTien int,
 	GhiChu nvarchar(100),
 	Foreign key (MaNV) References NhanVien(MaNV),
 	Foreign key (MaKH) References KhachHang(MaKH)
 )
 Create Table CT_PhieuGiaoHang (
-	MaPGH char(10),
-	MaSP char(10),
+	MaPGH varchar(10),
+	MaSP varchar(10),
 	SoLuong int,
 	ThanhTien int,
 	GhiChu nvarchar(100),
@@ -82,18 +83,18 @@ Create Table CT_PhieuGiaoHang (
 )
 
 Create Table HoaDonBanHang (
-	MaHD char(10) Primary key,
+	MaHD varchar(10) Primary key,
 	NgayLap date,
-	MaNV char(10),
-	MaKH char(10),
+	MaNV varchar(10),
+	MaKH varchar(10),
 	TongTien int,
 	GhiChu nvarchar(100),
 	Foreign key (MaNV) References NhanVien(MaNV),
 	Foreign key (MaKH) References KhachHang(MaKH)
 )
 Create Table CT_HoaDonBanHang (
-	MaHD char(10),
-	MaSP char(10),
+	MaHD varchar(10),
+	MaSP varchar(10),
 	SoLuong int,
 	ThanhTien int,
 	GhiChu nvarchar(100)
@@ -103,10 +104,10 @@ Create Table CT_HoaDonBanHang (
 )
 
 Create Table DonNhapHang (
-	MaDNH char(10) Primary key,
+	MaDNH varchar(10) Primary key,
 	NgayLap Date,
-	MaNV char(10),
-	MaNCC char(10),
+	MaNV varchar(10),
+	MaNCC varchar(10),
 	TongTien int ,
 	NgayGiaoDuKien date,
 	GhiChu nvarchar(100),
@@ -114,8 +115,8 @@ Create Table DonNhapHang (
 	Foreign key (MaNCC) References NhaCungCap (MaNCC)
 )
 Create Table CT_DonNhapHang (
-	MaDNH char(10),
-	MaSP char(10),
+	MaDNH varchar(10),
+	MaSP varchar(10),
 	SoLuong int,
 	ThanhTien int ,
 	GhiChu nvarchar(100),
@@ -125,18 +126,18 @@ Create Table CT_DonNhapHang (
 )
 
 Create Table HoaDonNhapHang (
-	MaHD char(10) Primary key,
+	MaHD varchar(10) Primary key,
 	NgayLap date,
-	MaNV char(10),
-	MaNCC char(10),
+	MaNV varchar(10),
+	MaNCC varchar(10),
 	TongTien int,
 	GhiChu nvarchar(100),
 	Foreign key (MaNV) References NhanVien (MaNV),
 	Foreign key (MaNCC) References NhaCungCap (MaNCC),
 )
 Create Table CT_HoaDonNhapHang (
-	MaHD char(10),
-	MaSP  char(10),
+	MaHD varchar(10),
+	MaSP  varchar(10),
 	Soluong int,
 	ThanhTien int,
 	GhiChu nvarchar(100),
@@ -146,20 +147,20 @@ Create Table CT_HoaDonNhapHang (
 )
 
 Create Table PhieuThu (
-	MaPT char(10) Primary key,
+	MaPT varchar(10) Primary key,
 	NgayLap date,
-	MaNV char(10),
-	MaKH char(10),
+	MaNV varchar(10),
+	MaKH varchar(10),
 	SoTienNo int,
 	SoTienThu int,
 	Foreign key (MaNV) References NhanVien(MaNV),
 	Foreign key (MaKH) References KhachHang(MaKH)
 )
 Create Table PhieuChi (
-	MaPC char(10)  Primary key,
+	MaPC varchar(10)  Primary key,
 	NgayLap date,
-	MaNV char(10),
-	MaKH char(10),
+	MaNV varchar(10),
+	MaKH varchar(10),
 	SoTienNo int,
 	SoTienThu int,
 	Foreign key (MaNV) References NhanVien(MaNV),
@@ -167,7 +168,7 @@ Create Table PhieuChi (
 )
 Create Table BaoCaoTonKho (
 	NgayLap date,
-	MaSP char(10),
+	MaSP varchar(10),
 	SLTonKyDau int,
 	SLNhap int,
 	SLXuat int,
@@ -179,7 +180,7 @@ Create Table BaoCaoTonKho (
 )
  Create Table BaoCaoDoanhThu (
 	NgayLap date,
-	MaSP char(10),
+	MaSP varchar(10),
 	TongChi int,
 	PhatSinh int,
 	TongThu int,
@@ -190,7 +191,7 @@ Create Table BaoCaoTonKho (
  )
  Create Table BaoCaoCongNoKH (
 	NgayLap date,
-	MaKH char(10),
+	MaKH varchar(10),
 	NoKyDau int,
 	PhatSinh int,
 	NoKyCuoi int,
