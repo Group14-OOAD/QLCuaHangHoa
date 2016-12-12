@@ -27,7 +27,7 @@ Create Table KhachHang (
 	MaKH varchar(10) Primary key,
 	HoTen nvarchar(50),
 	DiaChi nvarchar(50),
-	SoDT int,
+	SoDT varchar(15),
 	GhiChu nvarchar(100),
 ) 
 
@@ -35,7 +35,7 @@ Create Table NhaCungCap (
 	MaNCC varchar(10) Primary key,
 	Ten nvarchar(50),
 	DiaChi nvarchar(50),
-	SoDT int,
+	SoDT varchar(15),
 	GhiChu nvarchar(100),
 )
 
