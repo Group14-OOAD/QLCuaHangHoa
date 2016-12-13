@@ -12,30 +12,53 @@ namespace DAO
 {
     public class KhachHangDAO: DBConnection
     {
+        public KhachHangDAO() : base() { }
         public DataTable GetDSKhachHang()
         {
-            OpenConnect();
-            DataTable data = new DataTable();
-            string store = "KHACHHANG_LAYDS";
-            sqlCommand = new SqlCommand(store, connect);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlAdapter = new SqlDataAdapter(sqlCommand);
-            sqlAdapter.Fill(data);
-            CloseConnect();
-            return data;
+            try
+            {
+                string store = "KHACHHANG_LAYDS";
+                SqlCommand cmd = new SqlCommand(store, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                conn.Close();
+                return dt;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return null;
+            }
+          
         }
 
         public DataTable GetThongTinKH(string _maKH)
         {
-            OpenConnect();
-            DataTable data = new DataTable();
-            string store = "KHACHHANG_LAYTHONGTIN";
-            sqlCommand = new SqlCommand(store, connect);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlAdapter = new SqlDataAdapter(sqlCommand);
-            sqlAdapter.Fill(data);
-            CloseConnect();
-            return data;
+            try
+            {
+                string store = "KHACHHANG_LAYTHONGTIN";
+                SqlCommand cmd = new SqlCommand(store, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                conn.Close();
+                return dt;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return null;
+            }
+           
         }
 
         //public bool SuaKhachHang(string _maKH, string _hoTen, string _diaChi, string _soDT, string _ghiChu)
@@ -64,96 +87,180 @@ namespace DAO
 
         public bool Insert_KhachHang(string _hoTen, string _diaChi, string _soDT, string _ghiChu)
         {
-            OpenConnect();
-            string store = "KHACHHANG_INSERT";
-            sqlCommand = new SqlCommand(store, connect);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add(new SqlParameter("@HoTen", _hoTen));
-            sqlCommand.Parameters.Add(new SqlParameter("@DiaChi", _diaChi));
-            sqlCommand.Parameters.Add(new SqlParameter("@SoDT", _soDT));
-            sqlCommand.Parameters.Add(new SqlParameter("@GhiChu", _ghiChu));
-            sqlCommand.ExecuteNonQuery();
-            CloseConnect();
-            return true;
+            try
+            {
+                string store = "KHACHHANG_INSERT";
+                SqlCommand cmd = new SqlCommand(store, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("_hoTen", SqlDbType.NChar, 50));
+                cmd.Parameters.Add(new SqlParameter("_diaChi", SqlDbType.NVarChar, 50));
+                cmd.Parameters.Add(new SqlParameter("_soDT", SqlDbType.NVarChar, 15));
+                cmd.Parameters.Add(new SqlParameter("_ghiChu", SqlDbType.NVarChar, 100));
+
+
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+            
+          
+                conn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return false;
+            }
+           
         }
 
         public bool Update_KhachHang(string _maKH, string _hoTen, string _diaChi, string _soDT, string _ghiChu)
         {
-            OpenConnect();
-            string store = "KHACHHANG_UPDATE";
-            sqlCommand = new SqlCommand(store, connect);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-             sqlCommand.Parameters.Add(new SqlParameter("@MaKH", _maKH));
-            sqlCommand.Parameters.Add(new SqlParameter("@HoTen",_hoTen));
-            sqlCommand.Parameters.Add(new SqlParameter("@DiaChi",_diaChi));
-            sqlCommand.Parameters.Add(new SqlParameter("@SoDT", _soDT));
-            sqlCommand.Parameters.Add(new SqlParameter("@GhiChu", _ghiChu));
-            sqlCommand.ExecuteNonQuery();
-            CloseConnect();
-            return true;
+            try
+            {
+                string store = "KHACHHANG_UPDATE";
+                SqlCommand cmd = new SqlCommand(store, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("_maKH", SqlDbType.NChar, 50));
+                cmd.Parameters.Add(new SqlParameter("_hoTen", SqlDbType.NChar, 50));
+                cmd.Parameters.Add(new SqlParameter("_diaChi", SqlDbType.NVarChar, 50));
+                cmd.Parameters.Add(new SqlParameter("_soDT", SqlDbType.NVarChar, 15));
+                cmd.Parameters.Add(new SqlParameter("_ghiChu", SqlDbType.NVarChar, 100));
+
+
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                conn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return false;
+            }
+            
         }
 
         public bool Delete_KhachHang(string _maKH)
         {
-            OpenConnect();
-            string store = "HOADON_DELETE";
+            try
+            {
+                string store = "KHACHHANG_UPDATE";
+                SqlCommand cmd = new SqlCommand(store, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("_maKH", SqlDbType.NChar, 50));
 
-            sqlCommand = new SqlCommand(store, connect);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add(new SqlParameter("@makh", _maKH));
-            sqlCommand.ExecuteNonQuery();
-            CloseConnect();
-            return true;
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                conn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return false;
+            }
+             
         }
 
         public DataTable Search_KhachHang(string _maKH, string _hoTen, string _diaChi, string _soDT)
         {
-            OpenConnect();
-            DataTable data = new DataTable();
-            string store = "KHACHHANG_TIMKIEM2";
-            sqlCommand = new SqlCommand(store, connect) { CommandType = CommandType.StoredProcedure };
-            sqlCommand.Parameters.Add(new SqlParameter("@makh", _maKH));
-            sqlCommand.Parameters.Add(new SqlParameter("@tenkh", _hoTen));
-            sqlCommand.Parameters.Add(new SqlParameter("@diachi", _diaChi));
-            sqlCommand.Parameters.Add(new SqlParameter("@email", _soDT));
+            try
+            {
+                string store = "KHACHHANG_TIMKIEM2";
+                SqlCommand cmd = new SqlCommand(store, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("_maKH", SqlDbType.NChar, 50));
+                cmd.Parameters.Add(new SqlParameter("_hoTen", SqlDbType.NChar, 50));
+                cmd.Parameters.Add(new SqlParameter("_diaChi", SqlDbType.NVarChar, 50));
+                cmd.Parameters.Add(new SqlParameter("_soDT", SqlDbType.NVarChar, 15));
+             
 
-            sqlAdapter = new SqlDataAdapter(sqlCommand);
-            sqlAdapter.Fill(data);
-            CloseConnect();
-            return data;
+
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                conn.Close();
+                return dt;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return null;
+            }
+            
         }
         public DataTable Search_KhachHangTuKhoa(string _tuKhoa)
         {
-            OpenConnect();
-            DataTable data = new DataTable();
-            string store = "KHACHHANG_TIMKIEM";
-            sqlCommand = new SqlCommand(store, connect) { CommandType = CommandType.StoredProcedure };
-            sqlCommand.Parameters.Add(new SqlParameter("@tukhoa",_tuKhoa));
-           
+            try
+            {
+                string store = "KHACHHANG_TIMKIEM";
+                SqlCommand cmd = new SqlCommand(store, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("_tuKhoa", SqlDbType.NChar, 50));
+               
 
-            sqlAdapter = new SqlDataAdapter(sqlCommand);
-            sqlAdapter.Fill(data);
-            CloseConnect();
-            return data;
+
+
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                conn.Close();
+                return dt;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return null;
+            }
+            
         }
 
         public DataTable Load_DSKhachHang()
         {
-            OpenConnect();
-            DataTable data = new DataTable();
-            string store = "KHACHHANG_LAYDS";
-            sqlCommand = new SqlCommand(store, connect) { CommandType = CommandType.StoredProcedure };
-          
-            sqlAdapter = new SqlDataAdapter(sqlCommand);
-            sqlAdapter.Fill(data);
-            CloseConnect();
-            return data;
+            try
+            {
+                string store = "KHACHHANG_LAYDS";
+                SqlCommand cmd = new SqlCommand(store, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                conn.Close();
+                return dt;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                return null;
+            }
         }
 
         public static bool Update_KhachHang(string _maKH, string _hoTen, string _diaChi, string _soDT)
         {
             throw new NotImplementedException();
         }
+
+        public SqlConnection connect { get; set; }
     }
     }
 
