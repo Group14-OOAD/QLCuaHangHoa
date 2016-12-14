@@ -1,3 +1,0 @@
-- ALTER TABLE NhanVien ADD NamSinh INT
-- ALTER TABLE NhanVien ALTER COLUMN SoDT CHAR(15)
-- ALTER TABLE HoaDon  add ChietKhau (float)
