@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAO_Login;
-using DTO_Login;
+using DAO;
+using DTO;
 using System.Data;
 
 namespace BusinessLogicTier
@@ -31,6 +31,10 @@ namespace BusinessLogicTier
         public DataTable getAllNhanVien()
         {
             return objNV.getAllNhanVien();
+        }
+        public DataTable searchNhanVien(string maNV, string hoTen, int namSinh, string maLoaiNV)
+        {
+            return objNV.searchNhanVien(maNV, hoTen, namSinh, maLoaiNV);
         }
     }
 }

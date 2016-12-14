@@ -3,31 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DTO_Login;
+using DTO;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DAO_Login
+namespace DAO
 {
     public class NhanVienDAO: DBConnection
     {
         public NhanVienDAO(): base(){ }
-
+        
         public bool addNhanVien(NhanVien _nhanVien)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand("NHANVIEN_Insert", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("_maNV", SqlDbType.NChar, 20));
-                cmd.Parameters.Add(new SqlParameter("_hoTen", SqlDbType.NVarChar, 50));
-                cmd.Parameters.Add(new SqlParameter("_namSinh", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("_gioiTinh", SqlDbType.Bit));
-                cmd.Parameters.Add(new SqlParameter("_soDT", SqlDbType.NChar, 15));
-                cmd.Parameters.Add(new SqlParameter("_email", SqlDbType.NChar, 20));
-                cmd.Parameters.Add(new SqlParameter("_username", SqlDbType.NChar, 20));
-                cmd.Parameters.Add(new SqlParameter("_password", SqlDbType.NChar, 20));
+                cmd.Parameters.Add(new SqlParameter("@maNhanVien", SqlDbType.VarChar, 10)).Value = _nhanVien.maNhanVien;
+                cmd.Parameters.Add(new SqlParameter("@hoTen", SqlDbType.NVarChar, 50)).Value = _nhanVien.hoTen;
+                cmd.Parameters.Add(new SqlParameter("@namSinh", SqlDbType.Int)).Value = _nhanVien.namSinh;
+                cmd.Parameters.Add(new SqlParameter("@gioiTinh", SqlDbType.Bit)).Value = _nhanVien.gioiTinh;
+                cmd.Parameters.Add(new SqlParameter("@soDT", SqlDbType.VarChar, 15)).Value = _nhanVien.soDienThoai;
+                cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 50)).Value = _nhanVien.email;
+                cmd.Parameters.Add(new SqlParameter("@username", SqlDbType.VarChar, 50)).Value = _nhanVien.username;
+                cmd.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 50)).Value = _nhanVien.password;
+                cmd.Parameters.Add(new SqlParameter("@maLoaiNV", SqlDbType.VarChar, 20)).Value = _nhanVien.maLoaiNV;
+                cmd.Parameters.Add(new SqlParameter("@isActive", SqlDbType.VarChar, 20)).Value = _nhanVien.isActive;
 
+                //Get value to parameters:
+                //_maNV.Value = _nhanVien.maNhanVien;
+                //_hoTen.Value = _nhanVien.hoTen;
+                //_namSinh.Value = _nhanVien.namSinh;
+                //_gioiTinh.Value = _nhanVien.gioiTinh;
+                //_soDT.Value = _nhanVien.soDienThoai;
+                //_email.Value = _nhanVien.email;
+                //_username.Value = _nhanVien.username;
+                //_password.Value = _nhanVien.password;
+                //_maLoaiNV.Value = _nhanVien.maLoaiNV;
 
                 if (conn.State != ConnectionState.Open)
                     conn.Open();
@@ -38,6 +50,7 @@ namespace DAO_Login
             catch(Exception e)
             {
                 conn.Close();
+                Console.WriteLine("Lỗi: " + e.Message);
                 return false;
             }
         }
@@ -48,8 +61,8 @@ namespace DAO_Login
             {
                 SqlCommand cmd = new SqlCommand("NHANVIEN_Del", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("_maNV", SqlDbType.NChar, 20));
-
+                cmd.Parameters.Add(new SqlParameter("@maNhanVien", SqlDbType.VarChar, 10)).Value = _maNhanVien;
+                //_maNV.Value = _maNhanVien;
 
                 if (conn.State != ConnectionState.Open)
                     conn.Open();
@@ -60,6 +73,7 @@ namespace DAO_Login
             catch (Exception e)
             {
                 conn.Close();
+                Console.WriteLine("Lỗi: " + e.Message);
                 return false;
             }
         }
@@ -70,15 +84,26 @@ namespace DAO_Login
             {
                 SqlCommand cmd = new SqlCommand("NHANVIEN_Update", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("_maNV", SqlDbType.NChar, 20));
-                cmd.Parameters.Add(new SqlParameter("_hoTen", SqlDbType.NVarChar, 50));
-                cmd.Parameters.Add(new SqlParameter("_namSinh", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("_gioiTinh", SqlDbType.Bit));
-                cmd.Parameters.Add(new SqlParameter("_soDT", SqlDbType.NChar, 15));
-                cmd.Parameters.Add(new SqlParameter("_email", SqlDbType.NChar, 20));
-                cmd.Parameters.Add(new SqlParameter("_username", SqlDbType.NChar, 20));
-                cmd.Parameters.Add(new SqlParameter("_password", SqlDbType.NChar, 20));
+                //_maNV = cmd.Parameters.Add(new SqlParameter("@maNhanVien", SqlDbType.VarChar, 10));
+                //_hoTen = cmd.Parameters.Add(new SqlParameter("@hoTen", SqlDbType.NVarChar, 50));
+                //_namSinh = cmd.Parameters.Add(new SqlParameter("@namSinh", SqlDbType.Int));
+                //_gioiTinh = cmd.Parameters.Add(new SqlParameter("@gioiTinh", SqlDbType.Bit));
+                //_soDT = cmd.Parameters.Add(new SqlParameter("@soDT", SqlDbType.VarChar, 15));
+                //_email = cmd.Parameters.Add(new SqlParameter("@email", SqlDbType.VarChar, 50));
+                //_username = cmd.Parameters.Add(new SqlParameter("@username", SqlDbType.VarChar, 50));
+                //_password = cmd.Parameters.Add(new SqlParameter("@password", SqlDbType.VarChar, 50));
+                //_maLoaiNV = cmd.Parameters.Add(new SqlParameter("@maLoaiNV", SqlDbType.VarChar, 20));
 
+                ////
+                //_maNV.Value = _nhanVien.maNhanVien;
+                //_hoTen.Value = _nhanVien.hoTen;
+                //_namSinh.Value = _nhanVien.namSinh;
+                //_gioiTinh.Value = _nhanVien.gioiTinh;
+                //_soDT.Value = _nhanVien.soDienThoai;
+                //_email.Value = _nhanVien.email;
+                //_username.Value = _nhanVien.username;
+                //_password.Value = _nhanVien.password;
+                //_maLoaiNV.Value = _nhanVien.maLoaiNV;
 
                 if (conn.State != ConnectionState.Open)
                     conn.Open();
@@ -89,6 +114,7 @@ namespace DAO_Login
             catch (Exception e)
             {
                 conn.Close();
+                Console.WriteLine("Lỗi: " + e.Message);
                 return false;
             }
         }
@@ -99,8 +125,8 @@ namespace DAO_Login
             {
                 SqlCommand cmd = new SqlCommand("NHANVIEN_getNhanVien", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("_maNV", SqlDbType.NChar, 20));
-
+                //_maNV = cmd.Parameters.Add(new SqlParameter("@maNhanVien", SqlDbType.VarChar, 10));
+                //_maNV.Value = _maNhanVien;
 
                 if (conn.State != ConnectionState.Open)
                     conn.Open();
@@ -112,12 +138,11 @@ namespace DAO_Login
                     nhanVien.maNhanVien = dr["MaNV"].ToString();
                     nhanVien.hoTen = dr["HoTen"].ToString();
                     nhanVien.namSinh = (int)dr["NamSinh"];
-                    if ((int)dr["GioiTinh"] == 1)
-                        nhanVien.gioiTinh = "Nam";
-                    else
-                        nhanVien.gioiTinh = "Nữ";
+                    nhanVien.gioiTinh = (int)dr["GioiTinh"] == 1 ? true : false;
                     nhanVien.soDienThoai = dr["SoDT"].ToString();
                     nhanVien.email = dr["Email"].ToString();
+                    nhanVien.username = dr["Username"].ToString();
+                    nhanVien.password = dr["Password"].ToString();
                 }
                 conn.Close();
                 return nhanVien;
@@ -125,6 +150,7 @@ namespace DAO_Login
             catch (Exception e)
             {
                 conn.Close();
+                Console.WriteLine("Lỗi: " + e.Message);
                 return null;
             }
         }
@@ -147,6 +173,40 @@ namespace DAO_Login
             catch (Exception e)
             {
                 conn.Close();
+                Console.WriteLine("Lỗi: " + e.Message);
+                return null;
+            }
+        }
+
+        public DataTable searchNhanVien(string maNhanVien, string hoTen, int namSinh, string maLoaiNV)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("NHANVIEN_Search", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //_maNV = cmd.Parameters.Add(new SqlParameter("@maNhanVien", SqlDbType.VarChar, 10));
+                //_hoTen = cmd.Parameters.Add(new SqlParameter("@hoTen", SqlDbType.NVarChar, 50));
+                //_namSinh = cmd.Parameters.Add(new SqlParameter("@namSinh", SqlDbType.Int));
+                //_maLoaiNV = cmd.Parameters.Add(new SqlParameter("@maLoaiNV", SqlDbType.VarChar, 20));
+
+                ////
+                //_maNV.Value = maNhanVien;
+                //_hoTen.Value = hoTen;
+                //_namSinh.Value = namSinh;
+                //_maLoaiNV.Value = maLoaiNV;
+
+                if (conn.State != ConnectionState.Open)
+                    conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+                conn.Close();
+                return dt;
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                Console.WriteLine("Lỗi: " + e.Message);
                 return null;
             }
         }
