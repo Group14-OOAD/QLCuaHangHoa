@@ -1,1 +1,2 @@
 - ALTER TABLE HoaDon  add ChietKhau (float)
+- AlTER TABLE NHANVIEN ADD IsActive BIT
