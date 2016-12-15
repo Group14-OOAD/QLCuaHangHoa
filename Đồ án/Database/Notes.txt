@@ -1,2 +1,4 @@
 - ALTER TABLE HoaDon  add ChietKhau (float)
 - AlTER TABLE NHANVIEN ADD IsActive BIT
+- Thêm chiết khấu cho phần Hóa đơn
+- Sửa bản phiếu chi ( So tien thu -> so tiền chi)
