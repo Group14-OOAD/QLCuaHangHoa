@@ -1,17 +1,14 @@
 USE [QuanLiCuaHangHoa]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SANPHAM_Insert]    Script Date: 1/2/2017 9:20:47 PM ******/
+/****** Object:  StoredProcedure [dbo].[SANPHAM_Insert]    Script Date: 1/3/2017 1:43:26 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[SANPHAM_Insert]
+Create PROCEDURE [dbo].[SANPHAM_Insert]
 	(
 		@maSanPham VARCHAR(10),
 		@tenSP NVARCHAR(50),
@@ -19,15 +16,14 @@ CREATE PROCEDURE [dbo].[SANPHAM_Insert]
 		@donGia INT,
 		@ghiChu NVARCHAR(100),
 		@maLoaiSP VARCHAR(20),
+		@soLuong int,
 		@isActive bit
 	)
 AS
 BEGIN
 	INSERT INTO SanPham VALUES(@maSanPham, @tenSP, @donVi,
-								@donGia, @ghiChu, @maLoaiSP, @isActive)
+								@donGia, @ghiChu, @maLoaiSP,@soLuong, @isActive)
 END
-
-
 
 GO
 
