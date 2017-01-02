@@ -4,3 +4,4 @@
 - Thêm số lượng cho bảng sản phẩm
 - Thêm thuộc tính mã đơn đặt hàng cho bảng phiếu giao hàng
 - Sửa bản phiếu chi ( So tien thu -> so tiền chi)
+- Thêm thuộc tính IsActive cho tất cả các bảng
